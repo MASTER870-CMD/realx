@@ -16,12 +16,14 @@ A short-form, vertical-scroll video feed application built with Next.js 16, Reac
 ![PWA](https://img.shields.io/badge/PWA-next--pwa-5A0FC8)
 
 ---
+<img width="318" height="547" alt="Screenshot 2026-09-25 152913" src="https://github.com/user-attachments/assets/c3df9912-26ea-41a9-90a9-09c485a8b1d9" />
 
 ## Overview
 
 ReelX is a TikTok/Reels-style vertical video feed. Users sign in with Google, upload short videos (stored on Cloudinary), like/comment/follow other creators, and browse a feed ranked by an engagement-and-personalization scoring formula computed in the browser. There is no machine-learning model or external AI service involved anywhere in the ranking pipeline — the feed logic is explicit, readable JavaScript.
 
 ## Key Features
+<img width="1365" height="767" alt="Screenshot 2026-09-25 153041" src="https://github.com/user-attachments/assets/2aa528c6-3a24-42e1-a9f4-dcfc5cb401f9" />
 
 - Google sign-in via Firebase Authentication
 - Vertical, swipe/scroll snap-based video feed with autoplay-on-view
@@ -35,10 +37,12 @@ ReelX is a TikTok/Reels-style vertical video feed. Users sign in with Google, up
 - Installable PWA (manifest + service worker via `next-pwa`)
 
 ## Recommendation / Feed System
+<img width="1365" height="767" alt="Screenshot 2026-09-25 153046" src="https://github.com/user-attachments/assets/83da2867-f6ae-4508-8497-25006605d613" />
 
 **This is a rule-based ranking system, not a machine-learning recommender.** No model training, embeddings, vector search, or external AI API is used anywhere in the codebase — a code comment in `api/videos/route.ts` explicitly states the current implementation is a heuristic stand-in for a future ML/collaborative-filtering system.
 
 ### How the feed works
+<img width="1365" height="767" alt="Screenshot 2026-09-25 153053" src="https://github.com/user-attachments/assets/942061a8-d99d-452e-98c4-c074c12e53df" />
 
 The active ranking logic (in `src/app/page.tsx`, `fetchVideos()`) computes, for every video in the merged feed:
 
@@ -50,6 +54,7 @@ totalScore        = globalEngagement + personalBoost
 ```
 
 Videos are sorted descending by `totalScore`. The `personalBoost` term is what makes the feed "personalized": it comes from a per-user Firestore map (`creatorInteractions`) that accumulates points whenever the current user interacts with a given creator's content:
+<img width="318" height="547" alt="Screenshot 2026-09-25 152913" src="https://github.com/user-attachments/assets/bae32120-fb99-434f-845c-c9f0c16999ee" />
 
 | Action | Creator affinity | Video affinity |
 |---|---|---|
