@@ -42,7 +42,7 @@ export default function AdminDashboard() {
     const fetchAnalytics = async () => {
       try {
         const uSnap = await getDocs(collection(db, "users"));
-        const userList = uSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const userList = uSnap.docs.map(doc => ({ id: doc.id, ...doc.data() } as any));
         userList.sort((a, b) => (b.followers?.length || 0) - (a.followers?.length || 0));
         setUsers(userList);
 

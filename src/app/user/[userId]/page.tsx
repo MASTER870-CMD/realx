@@ -70,7 +70,7 @@ export default function UserProfile({ params }: { params: Promise<{ userId: stri
         const videos = videosSnap.docs.map(doc => {
           const data = doc.data();
           const stats = statsMap.get(doc.id) || { likes: [], comments: [] };
-          return {
+          return { ...(doc.data() as any),
             id: doc.id,
             ...data,
             likeCount: stats.likes?.length || 0,
@@ -79,7 +79,7 @@ export default function UserProfile({ params }: { params: Promise<{ userId: stri
         });
         
         // Sort by newest
-        videos.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        videos.sort((a, b) => new Date((b as any).created_at || 0).getTime() - new Date((a as any).created_at || 0).getTime());
         setUserVideos(videos);
 
       } catch (err) {
